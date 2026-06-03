@@ -1,0 +1,1327 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+    width: 100%;
+}
+
+
+.navbar {
+    background-color: #1d3b5e;
+    padding: 15px 0;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+.nav-links a:hover {
+    color: #b0c4de;
+}
+
+
+.home-section {
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+.home-section .container {
+    background: linear-gradient(135deg, #1d3b5e 0%, #35587f 100%);
+    border-radius: 50px;
+    padding: 60px 50px;
+    color: #ffffff;
+    position: relative;
+    min-height: 260px;
+}
+
+.home-section h1 {
+    font-size: 50px;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+.home-section p {
+    font-size: 20px;
+    line-height: 1.5;
+}
+
+.btn {
+    background-color: #0d0e10;
+    color: #ffffff;
+    border: none;
+    padding: 12px 32px;
+    border-radius: 25px;
+    font-size: 18px;
+    cursor: pointer;
+    font-weight: bold;
+    position: absolute;
+    bottom: 40px;
+    right: 50px;
+    transition: background-color 0.2s;
+}
+
+.btn:hover {
+    background-color: #24262b;
+}
+
+
+.seccion-servicios {
+    text-align: center;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    width: 100%;
+}
+
+.seccion-servicios h2 {
+    font-size: 32px;
+    margin-bottom: 45px;
+    font-weight: bold;
+    color: #000000;
+}
+
+.seccion-servicios .container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+
+.seccion-servicios h2 {
+    grid-column: 1 / -1;
+}
+
+.servicios {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+}
+
+.imagen-servicio {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
+    object-fit: contain;
+}
+
+.servicios h3 {
+    font-size: 18px;
+    margin-bottom: 12px;
+    font-weight: bold;
+    line-height: 1.3;
+    color: #000000;
+}
+
+.servicios p {
+    font-size: 14px;
+    color: #444444;
+    line-height: 1.5;
+}
+
+.seccion-informacion {
+    background-color: #1d3b5e;
+    padding: 60px 0;
+    width: 100%;
+}
+
+.seccion-informacion .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+}
+
+.seccion-informacion h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    line-height: 1.2;
+    font-weight: bold;
+    color: #ffffff;
+    font-style: italic;
+}
+
+.seccion-informacion p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #ffffff;
+    margin-bottom: 28px;
+}
+
+.btn-compartido {
+    background-color: #0d0e10;
+    color: #ffffff;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s;
+    display: inline-block;
+}
+
+.btn-compartido:hover {
+    background-color: #24262b;
+}
+
+.imagen-corazon {
+    width: 260px;
+    height: 260px;
+    object-fit: contain;
+    flex-shrink: 0;
+    border-radius: 12px;
+}
+
+
+.footer {
+    background-color: #1d3b5e;
+    padding: 30px 0;
+    border-top: 80px solid #ffffff;
+}
+
+.footer .container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.footer-links {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+.footer-links a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+.footer-links a:hover {
+    color: #6fa0d8;
+}
+
+.footer-social {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    color: #444444;
+}
+
+.footer-social img {
+    width: 22px;
+    height: 22px;
+}
+
+
+
+
+
+
+
+.dashboard-bienvenida {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 30px;
+    background-color: #f0f2f5;
+}
+
+.bienvenida-izq {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.bienvenida-izq img {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.bienvenida-izq span {
+    font-size: 18px;
+    font-weight: bold;
+    color: #000000;
+}
+
+.reloj {
+    font-size: 38px;
+    font-weight: bold;
+    color: #000000;
+}
+
+
+.proxima-toma {
+    background-color: #f0f2f5;
+    text-align: center;
+    padding: 10px 20px 30px;
+}
+
+.proxima-toma .etiqueta {
+    font-size: 16px;
+    color: #444444;
+    margin-bottom: 4px;
+}
+
+.proxima-toma .nombre-medicamento {
+    font-size: 52px;
+    font-weight: bold;
+    color: #000000;
+    line-height: 1.1;
+    margin-bottom: 6px;
+}
+
+.proxima-toma .dosis-info {
+    font-size: 16px;
+    color: #222222;
+    line-height: 1.7;
+}
+
+
+.acciones-dashboard {
+    background-color: #f0f2f5;
+    padding: 0 30px 20px;
+}
+
+.acciones-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.btn-accion {
+    background-color: #3b5a7a;
+    color: #ffffff;
+    border: none;
+    padding: 14px 20px;
+    border-radius: 25px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    width: 100%;
+}
+
+.btn-accion:hover {
+    background-color: #1d3b5e;
+}
+
+
+.mascota-chat {
+    background-color: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    padding: 10px 30px 30px;
+}
+
+.mascota-chat img.mascota {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+}
+
+.chat-btn-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.chat-btn-wrap span {
+    font-size: 16px;
+    font-weight: bold;
+    color: #000000;
+}
+
+.chat-btn-wrap img {
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    border-radius: 50%;
+    border: 3px solid #3b5a7a;
+    padding: 6px;
+    background-color: #ffffff;
+    transition: transform 0.2s;
+}
+
+.chat-btn-wrap img:hover {
+    transform: scale(1.08);
+}
+
+.separador {
+    height: 1px;
+    background-color: #cccccc;
+    margin: 0 30px;
+}
+
+
+.seccion-medicamentos {
+    background-color: #ffffff;
+    padding: 30px;
+}
+
+.seccion-medicamentos h2 {
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 24px;
+    color: #000000;
+}
+
+.medicamento-item {
+    margin-bottom: 20px;
+}
+
+.medicamento-item h3 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #000000;
+    margin-bottom: 4px;
+}
+
+.medicamento-item p.estado-retrasado {
+    color: #cc0000 !important; /* Rojo */
+    font-weight: bold;
+    font-size: 15px;
+    padding-left: 16px;
+}
+
+.medicamento-item p.estado-tomado {
+    color: #228B22 !important; /* Verde */
+    font-weight: bold;
+    font-size: 15px;
+    padding-left: 16px;
+}
+
+.nota-cuidador {
+    font-size: 14px;
+    color: #333333;
+    padding-left: 16px;
+}
+
+.divider-med {
+    height: 1px;
+    background-color: #cccccc;
+    margin: 20px 0;
+}
+
+
+.btn-flotante {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-flotante img {
+    width: 36px;
+    height: 36px;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+}
+
+.btn-flotante img:hover {
+    opacity: 1;
+}
+
+/* ════════════════════════════════
+   REGISTRAR TOMA
+   ════════════════════════════════ */
+ 
+.registrar-toma-page {
+    background-color: #f0f2f5;
+    min-height: calc(100vh - 56px - 100px);
+    padding: 30px;
+}
+ 
+.registrar-toma-page .reloj-top {
+    text-align: right;
+    font-size: 38px;
+    font-weight: bold;
+    color: #000000;
+    margin-bottom: 10px;
+}
+ 
+.registrar-toma-page h2 {
+    font-size: 36px;
+    font-weight: bold;
+    text-align: center;
+    color: #000000;
+    margin-bottom: 40px;
+}
+ 
+.form-toma {
+    max-width: 700px;
+    margin: 0 auto;
+}
+ 
+.form-toma .med-nombre {
+    font-size: 22px;
+    font-weight: bold;
+    color: #000000;
+    margin-bottom: 16px;
+}
+ 
+.form-toma .med-dosis {
+    font-size: 16px;
+    color: #222222;
+    padding-left: 50px;
+    margin-bottom: 24px;
+}
+ 
+.form-toma-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    align-items: start;
+    margin-bottom: 30px;
+}
+ 
+.form-toma-grid .campo-grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+ 
+.form-toma-grid label {
+    font-size: 15px;
+    font-weight: bold;
+    color: #000000;
+}
+ 
+.form-toma-grid input,
+.form-toma-grid textarea,
+.form-toma-grid select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #aaaaaa;
+    border-radius: 4px;
+    font-size: 15px;
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    color: #000000;
+    resize: vertical;
+}
+ 
+.form-toma-grid textarea {
+    min-height: 80px;
+}
+ 
+.form-toma-grid input:focus,
+.form-toma-grid textarea:focus,
+.form-toma-grid select:focus {
+    outline: 2px solid #3b5a7a;
+}
+ 
+.btn-confirmar {
+    display: block;
+    margin: 0 auto;
+    background-color: #0d0e10;
+    color: #ffffff;
+    border: none;
+    padding: 12px 60px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+ 
+.btn-confirmar:hover {
+    background-color: #24262b;
+}
+ 
+
+.mensaje-exito {
+    display: none;
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    border-radius: 6px;
+    padding: 14px 20px;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* =============================================
+   ESTILOS PARA VISTA TRATAMIENTO
+   ============================================= */
+
+.tratamiento-container {
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.tratamiento-usuario {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.tratamiento-usuario img {
+    width: 55px;
+    height: 55px;
+}
+
+.tratamiento-usuario .nombre {
+    font-size: 20px;
+    font-weight: bold;
+    color: #000000;
+}
+
+.tratamiento-titulo {
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #000000;
+}
+
+.tratamiento-subtitulo {
+    text-align: center;
+    font-size: 17px;
+    color: #555555;
+    margin-bottom: 30px;
+}
+
+
+.calendario-tratamiento {
+    display: grid;
+    grid-template-columns: 90px repeat(7, 1fr);
+    gap: 3px;
+    background: #cbd5e1;
+    padding: 4px;
+    border-radius: 12px;
+    margin-bottom: 40px;
+    overflow: hidden;
+}
+
+.calendario-tratamiento .dia-header {
+    background: white;
+    padding: 12px 8px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 14.5px;
+    color: #1d3b5e;
+}
+
+.calendario-tratamiento .hora-cell {
+    background: white;
+    padding: 14px 6px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    border-right: 1px solid #e5e7eb;
+}
+
+.calendario-tratamiento .celda-horario {
+    background: white;
+    min-height: 72px;
+    padding: 6px;
+}
+
+.medicamento-celda {
+    background-color: #3b82f6;
+    color: white;
+    font-size: 13px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    margin-bottom: 4px;
+    font-weight: 500;
+}
+
+
+.botones-tratamiento {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    margin-bottom: 45px;
+    flex-wrap: wrap;
+}
+
+.botones-tratamiento .btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 50px;
+}
+
+
+.consumo-card {
+    background-color: #ffffff;
+    border-radius: 20px;
+    padding: 35px 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+}
+
+.consumo-card h2 {
+    font-size: 26px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 25px;
+    color: #000000;
+}
+
+.consumo-content {
+    display: flex;
+    align-items: center;
+    gap: 45px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.pie-chart {
+    flex-shrink: 0;
+}
+
+.consumo-info {
+    max-width: 420px;
+}
+
+.consumo-info p {
+    font-size: 18.5px;
+    line-height: 1.5;
+    color: #222222;
+}
+
+.consumo-info strong {
+    color: #14b8a6;
+    font-weight: bold;
+}
+
+
+.btn-inventario {
+    display: block;
+    margin: 0 auto;
+    background-color: #1d3b5e;
+    color: white;
+    padding: 14px 40px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-inventario:hover {
+    background-color: #2c5a8c;
+}
+.calendar-table-container {
+    margin-bottom: 40px;
+    overflow-x: auto;
+}
+
+.calendar-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #f8fafc;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.calendar-table th {
+    background-color: #1d3b5e;
+    color: white;
+    padding: 14px 8px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.calendar-table td,
+.calendar-table th.hora-header {
+    padding: 16px 8px;
+    text-align: center;
+    border: 1px solid #e2e8f0;
+    vertical-align: top;
+    font-size: 14.5px;
+}
+
+.calendar-table .hora-header {
+    background-color: #e2e8f0;
+    color: #1d3b5e;
+    font-weight: 600;
+    width: 90px;
+}
+
+.calendar-table td {
+    min-height: 78px;
+    background-color: white;
+}
+
+.medicamento-celda {
+    background-color: #3b82f6;
+    color: white;
+    padding: 8px 10px;
+    border-radius: 6px;
+    font-size: 13.5px;
+    text-align: center;
+    margin: 4px auto;
+    max-width: 140px;
+    display: inline-block;
+}
+/* =============================================
+   VISTA INVENTARIO
+   ============================================= */
+
+.inventario-card {
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    margin-bottom: 40px;
+}
+
+.medicamento-item-inventario {
+    display: flex;
+    gap: 25px;
+    align-items: flex-start;
+    margin-bottom: 25px;
+}
+
+.medicamento-header {
+    flex: 1;
+}
+
+.medicamento-header h3 {
+    font-size: 22px;
+    font-weight: bold;
+    color: #1d3b5e;
+    margin-bottom: 6px;
+}
+
+.cantidad-principal {
+    font-size: 15px;
+    color: #555555;
+}
+
+.medicamento-icono {
+    flex-shrink: 0;
+    text-align: center;
+}
+
+.medicamento-icono img {
+    width: 85px;
+    height: 85px;
+}
+
+.medicamento-detalles {
+    flex: 1.5;
+}
+
+.medicamento-detalles p {
+    margin: 8px 0;
+    font-size: 15.5px;
+    color: #333333;
+}
+
+.divider-inventario {
+    border: none;
+    height: 1px;
+    background-color: #e2e8f0;
+    margin: 30px 0;
+}
+
+
+.btn-inventario {
+    background-color: #1d3b5e;
+    color: white;
+    padding: 14px 45px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-inventario:hover {
+    background-color: #2c5a8c;
+    transform: translateY(-2px);
+}
+
+/* =============================================
+   BIOMARCADORES
+   ============================================= */
+
+.biomarcadores-inputs {
+    display: flex;
+    gap: 30px;
+    margin: 25px 0 35px;
+    flex-wrap: wrap;
+}
+
+.input-group {
+    flex: 1;
+    min-width: 280px;
+}
+
+.input-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #1d3b5e;
+}
+
+.valor-input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.tipo-select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: white;
+}
+
+
+.biomarcadores-hoy {
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+    margin-bottom: 30px;
+}
+
+.biomarcadores-hoy h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.estado {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.bueno {
+    color: #22c55e;
+    font-weight: bold;
+}
+
+.medicion-hoy {
+    background-color: #f8fafc;
+    padding: 18px;
+    border-radius: 10px;
+}
+
+.medicion-hoy h3 {
+    margin-bottom: 12px;
+    color: #1d3b5e;
+}
+
+
+.biomarcadores-mes h2 {
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.mes-titulo {
+    font-size: 20px;
+    color: #1d3b5e;
+    margin-bottom: 20px;
+}
+
+.calendar-biomarcadores {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    background: #e2e8f0;
+    padding: 4px;
+    border-radius: 12px;
+}
+
+.calendar-biomarcadores .dia-header {
+    background: #1d3b5e;
+    color: white;
+    text-align: center;
+    padding: 10px 4px;
+    font-size: 13.5px;
+    font-weight: bold;
+}
+
+.calendar-biomarcadores .dia {
+    background: white;
+    text-align: center;
+    padding: 12px 4px;
+    font-size: 15px;
+    min-height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+}
+
+.calendar-biomarcadores .dia.highlight {
+    background-color: #14b8a6;
+    color: white;
+    font-weight: bold;
+}
+
+.divider-biomarcadores {
+    border: none;
+    height: 1px;
+    background-color: #e2e8f0;
+    margin: 35px 0;
+}
+/* =============================================
+   REGISTRO DE BIOMARCADORES
+   ============================================= */
+
+.btn-registrar {
+    background-color: #1d3b5e;
+    color: white;
+    padding: 12px 28px;
+    border-radius: 50px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-registrar:hover {
+    background-color: #2c5a8c;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 480px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.modal-content label {
+    display: block;
+    margin: 15px 0 6px;
+    font-weight: bold;
+    color: #1d3b5e;
+}
+
+.modal-content input,
+.modal-content select,
+.modal-content textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.rango-info {
+    margin: 15px 0;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.rango-bueno { background: #d4edda; color: #155724; }
+.rango-alerta { background: #fff3cd; color: #856404; }
+.rango-malo { background: #f8d7da; color: #721c24; }
+
+.modal-buttons {
+    margin-top: 25px;
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+}
+
+.btn-cancelar {
+    padding: 12px 24px;
+    background: #6b7280;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn-guardar {
+    padding: 12px 32px;
+    background: #1d3b5e;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+
+.mediciones-list .medicion-item {
+    background: #f8fafc;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+}
+/* =============================================
+   BIOMARCADORES - CSS ADICIONAL
+   ============================================= */
+
+.btn-registrar {
+    background-color: #1d3b5e;
+    color: white;
+    padding: 12px 28px;
+    border-radius: 50px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+    margin: 15px 0 25px;
+}
+
+.btn-registrar:hover {
+    background-color: #2c5a8c;
+    transform: translateY(-2px);
+}
+
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.65);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 30px 35px;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 480px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-content h2 {
+    margin-bottom: 20px;
+    color: #1d3b5e;
+    text-align: center;
+}
+
+.modal-content label {
+    display: block;
+    margin: 16px 0 6px;
+    font-weight: bold;
+    color: #1d3b5e;
+}
+
+.modal-content input,
+.modal-content select,
+.modal-content textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.modal-content textarea {
+    resize: vertical;
+    min-height: 70px;
+}
+
+.rango-info {
+    margin: 15px 0;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+.rango-alerta { 
+    background: #fff3cd; 
+    color: #856404; 
+    border: 1px solid #ffeaa7;
+}
+
+
+.modal-buttons {
+    margin-top: 25px;
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+}
+
+.btn-cancelar {
+    padding: 12px 26px;
+    background: #6b7280;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.btn-guardar {
+    padding: 12px 32px;
+    background: #1d3b5e;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-cancelar:hover { background: #4b5563; }
+.btn-guardar:hover { background: #2c5a8c; }
+
+
+.medicion-item {
+    background: #f8fafc;
+    padding: 16px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    border-left: 5px solid #1d3b5e;
+}
+
+
+.calendar-biomarcadores {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    background: #e2e8f0;
+    padding: 5px;
+    border-radius: 12px;
+}
+
+.dia-header {
+    background: #1d3b5e;
+    color: white;
+    text-align: center;
+    padding: 10px 6px;
+    font-size: 13.5px;
+    font-weight: bold;
+    border-radius: 6px;
+}
+
+.dia {
+    background: white;
+    text-align: center;
+    padding: 14px 6px;
+    font-size: 15px;
+    min-height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.dia:hover {
+    background: #f1f5f9;
+    transform: scale(1.03);
+}
+
+.dia.highlight {
+    background-color: #14b8a6;
+    color: white;
+    font-weight: bold;
+}
+
+.contador {
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    background: rgba(255,255,255,0.95);
+    color: #1d3b5e;
+    font-size: 11px;
+    font-weight: bold;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
