@@ -2,9 +2,9 @@ import {Link} from 'react-router-dom';
 function Footer() {
     return (
         <>
-         <footer class="footer">
-            <div class="container">
-                <ul class="footer-links">
+         <footer className="footer">
+            <div className="container">
+                <ul className="footer-links">
                     <li><Link to="/home">Home</Link></li>
                     <li><Link to="/services">Services</Link></li>
                     <li><Link to="/contact">Contact</Link></li>

@@ -1,0 +1,220 @@
+{
+  "usuarios": [
+    {
+      "id": "1",
+      "nombre": "Rodrigo Lopez",
+      "email": "rodrigo@medicent.com",
+      "avatar": "https://img.icons8.com/ios-filled/50/000000/user-male-circle.png"
+    }
+  ],
+  "medicamentos": [
+    {
+      "id": "1",
+      "usuarioId": 1,
+      "nombre": "Metotrexato",
+      "dosis": "500mg",
+      "via": "Oral",
+      "frecuencia": "Lunes, Jueves, Viernes",
+      "horario": "09:00",
+      "duracion": "3 meses",
+      "estado": "activo"
+    },
+    {
+      "id": "2",
+      "usuarioId": 1,
+      "nombre": "Acetaminofen",
+      "dosis": "500mg",
+      "via": "Oral",
+      "frecuencia": "Diario",
+      "horario": "08:00",
+      "duracion": "1 mes",
+      "estado": "activo"
+    }
+  ],
+  "tomas": [
+    {
+      "id": "1",
+      "usuarioId": 1,
+      "medicamentoId": 2,
+      "medicamento": "Acetaminofen",
+      "dosis": "500 mg",
+      "hora": "13:00",
+      "fecha": "2026-06-02",
+      "via": "Oral",
+      "nota": "",
+      "estado": "tomado"
+    },
+    {
+      "id": "2",
+      "usuarioId": 1,
+      "medicamentoId": 2,
+      "medicamento": "Acetaminofen",
+      "dosis": "500 mg",
+      "hora": "09:00",
+      "fecha": "2026-06-02",
+      "via": "Oral",
+      "nota": "Nota de Edgar Suarez: Suministre medicamento a las 9:00",
+      "estado": "retrasado"
+    },
+    {
+      "usuarioId": 1,
+      "medicamento": "Metotrexato",
+      "dosis": "500 mg",
+      "hora": "15:21",
+      "fecha": "2026-06-02",
+      "via": "Oral",
+      "nota": "",
+      "estado": "tomado",
+      "id": "2iW-oHicxqU"
+    },
+    {
+      "usuarioId": 1,
+      "medicamento": "Metotrexato",
+      "dosis": "500",
+      "hora": "12:29",
+      "fecha": "2026-06-04",
+      "via": "Oral",
+      "nota": "",
+      "estado": "tomado",
+      "id": "C0UzJHr9oNo"
+    },
+    {
+      "usuarioId": 1,
+      "medicamento": "Metotrexato",
+      "dosis": "500",
+      "hora": "12:29",
+      "fecha": "2026-06-04",
+      "via": "Oral",
+      "nota": "",
+      "estado": "tomado",
+      "id": "KKJHj85QBYc"
+    }
+  ],
+  "proximaToma": {
+    "usuarioId": 1,
+    "medicamento": "Metotrexato",
+    "dosis": "500mg",
+    "hora": "19:00",
+    "via": "Oral"
+  },
+  "biomarcadores": [
+    {
+      "id": "1",
+      "usuarioId": 1,
+      "tipo": "fc",
+      "nombre": "Frecuencia Cardíaca",
+      "valor": 72,
+      "unidad": "lpm",
+      "fecha": "2026-06-02",
+      "hora": "13:00",
+      "estado": "bueno",
+      "notas": ""
+    },
+    {
+      "id": "2",
+      "usuarioId": 1,
+      "tipo": "fc",
+      "nombre": "Frecuencia Cardíaca",
+      "valor": 85,
+      "unidad": "lpm",
+      "fecha": "2026-09-13",
+      "hora": "09:30",
+      "estado": "bueno",
+      "notas": ""
+    },
+    {
+      "id": "3",
+      "usuarioId": 1,
+      "tipo": "spo2",
+      "nombre": "Saturación de Oxígeno",
+      "valor": 97,
+      "unidad": "%",
+      "fecha": "2026-09-05",
+      "hora": "10:15",
+      "estado": "bueno",
+      "notas": ""
+    }
+  ],
+  "inventario": [
+    {
+      "id": "1",
+      "usuarioId": 1,
+      "medicamentoId": 1,
+      "nombre": "Metotrexato",
+      "cantidadTotal": "40 pastillas",
+      "frascos": 1,
+      "suministroRestante": "12 pastillas",
+      "fechaVencimiento": "2026-04-03",
+      "notas": "",
+      "tipo": "pastillas"
+    },
+    {
+      "id": "2",
+      "usuarioId": 1,
+      "medicamentoId": 2,
+      "nombre": "Acetaminofen",
+      "cantidadTotal": "200ml",
+      "frascos": 2,
+      "suministroRestante": "5ml",
+      "fechaVencimiento": "2026-04-03",
+      "notas": "",
+      "tipo": "liquido"
+    }
+  ],
+  "consumo": {
+    "usuarioId": 1,
+    "porcentaje": 84,
+    "medicamento": "Metotrexato",
+    "fechaCompra": "Viernes 21 de Septiembre"
+  },
+  "tratamientoSemana": [
+    {
+      "dia": "lun",
+      "hora": "09:00",
+      "medicamento": "Metotrexato",
+      "medicamentoId": 1,
+      "id": "tg7LLXrn5bQ"
+    },
+    {
+      "dia": "jue",
+      "hora": "08:00",
+      "medicamento": "Metotrexato",
+      "medicamentoId": 1,
+      "id": "C141JPNLbdA"
+    },
+    {
+      "dia": "vie",
+      "hora": "11:00",
+      "medicamento": "Metotrexato",
+      "medicamentoId": 1,
+      "id": "YHLgE2PoS58"
+    }
+  ],
+  "rangos": {
+    "fc": {
+      "min": 60,
+      "max": 100,
+      "unidad": "lpm",
+      "nombre": "Frecuencia Cardíaca"
+    },
+    "spo2": {
+      "min": 95,
+      "max": 100,
+      "unidad": "%",
+      "nombre": "Saturación de Oxígeno"
+    },
+    "temp": {
+      "min": 36.5,
+      "max": 37.5,
+      "unidad": "°C",
+      "nombre": "Temperatura"
+    },
+    "glucosa": {
+      "min": 70,
+      "max": 140,
+      "unidad": "mg/dL",
+      "nombre": "Glucosa"
+    }
+  },
+  "$schema": "./node_modules/json-server/schema.json"
+}
