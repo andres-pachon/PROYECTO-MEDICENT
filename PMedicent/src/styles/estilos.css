@@ -1,4 +1,3 @@
-
 * {
     margin: 0;
     padding: 0;
@@ -670,15 +669,6 @@ body {
     padding: 6px;
 }
 
-.medicamento-celda {
-    background-color: #3b82f6;
-    color: white;
-    font-size: 13px;
-    padding: 6px 8px;
-    border-radius: 6px;
-    margin-bottom: 4px;
-    font-weight: 500;
-}
 
 
 .botones-tratamiento {
@@ -745,22 +735,7 @@ body {
 }
 
 
-.btn-inventario {
-    display: block;
-    margin: 0 auto;
-    background-color: #1d3b5e;
-    color: white;
-    padding: 14px 40px;
-    border-radius: 50px;
-    font-size: 16px;
-    font-weight: bold;
-    border: none;
-    cursor: pointer;
-}
 
-.btn-inventario:hover {
-    background-color: #2c5a8c;
-}
 .calendar-table-container {
     margin-bottom: 40px;
     overflow-x: auto;
@@ -983,14 +958,6 @@ body {
     margin-bottom: 20px;
 }
 
-.calendar-biomarcadores {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 4px;
-    background: #e2e8f0;
-    padding: 4px;
-    border-radius: 12px;
-}
 
 .calendar-biomarcadores .dia-header {
     background: #1d3b5e;
@@ -1029,96 +996,18 @@ body {
    REGISTRO DE BIOMARCADORES
    ============================================= */
 
-.btn-registrar {
-    background-color: #1d3b5e;
-    color: white;
-    padding: 12px 28px;
-    border-radius: 50px;
-    font-weight: bold;
-    border: none;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-}
 
-.btn-registrar:hover {
-    background-color: #2c5a8c;
-}
 
-.modal {
-    display: none;
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,0.6);
-    z-index: 1000;
-    align-items: center;
-    justify-content: center;
-}
 
-.modal-content {
-    background: white;
-    padding: 30px;
-    border-radius: 16px;
-    width: 90%;
-    max-width: 480px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-}
 
-.modal-content label {
-    display: block;
-    margin: 15px 0 6px;
-    font-weight: bold;
-    color: #1d3b5e;
-}
 
-.modal-content input,
-.modal-content select,
-.modal-content textarea {
-    width: 100%;
-    padding: 12px;
-    border: 2px solid #e2e8f0;
-    border-radius: 8px;
-    font-size: 16px;
-}
 
-.rango-info {
-    margin: 15px 0;
-    padding: 12px;
-    border-radius: 8px;
-    font-weight: 500;
-}
 
 .rango-bueno { background: #d4edda; color: #155724; }
-.rango-alerta { background: #fff3cd; color: #856404; }
 .rango-malo { background: #f8d7da; color: #721c24; }
 
-.modal-buttons {
-    margin-top: 25px;
-    display: flex;
-    gap: 12px;
-    justify-content: flex-end;
-}
 
-.btn-cancelar {
-    padding: 12px 24px;
-    background: #6b7280;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-}
 
-.btn-guardar {
-    padding: 12px 32px;
-    background: #1d3b5e;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-}
 
 
 .mediciones-list .medicion-item {
@@ -1191,14 +1080,6 @@ body {
 
 .modal-content input,
 .modal-content select,
-.modal-content textarea {
-    width: 100%;
-    padding: 12px 14px;
-    border: 2px solid #e2e8f0;
-    border-radius: 8px;
-    font-size: 16px;
-    margin-bottom: 10px;
-}
 
 .modal-content textarea {
     resize: vertical;
@@ -1323,6 +1204,12 @@ body {
 
 
 
+
+/* ═══════════════════════════════════════
+   ESTILOS DE PÁGINAS DE FORMULARIO
+   Aplican solo bajo .pagina-formulario
+   ═══════════════════════════════════════ */
+
 :root {
   --verde-principal: #0D6E6E;
   --verde-claro:     #1A9B8C;
@@ -1354,18 +1241,15 @@ body {
 }
  
 
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+/* reset duplicado eliminado */
  
 html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
 }
  
-body {
+/* body scoped to formulario pages */
+.pagina-formulario {
   font-family: var(--fuente-cuerpo);
   font-size: 16px;
   line-height: 1.6;
@@ -1378,16 +1262,7 @@ body {
 }
  
 
-header,
-.encabezado-global {
-  background: var(--azul-profundo);
-  color: var(--blanco);
-  padding: 28px 48px;
-  position: relative;
-  overflow: hidden;
-}
- 
-header::before,
+.pagina-formulario header::before,
 .encabezado-global::before {
   content: '';
   position: absolute;
@@ -1400,7 +1275,7 @@ header::before,
   pointer-events: none;
 }
  
-header h1,
+.pagina-formulario header h1,
 .encabezado-global h1 {
   font-family: var(--fuente-titulo);
   font-size: 2rem;
@@ -1411,7 +1286,7 @@ header h1,
   gap: 10px;
 }
  
-header h1::before,
+.pagina-formulario header h1::before,
 .encabezado-global h1::before {
   content: '+';
   display: inline-flex;
@@ -1427,7 +1302,7 @@ header h1::before,
   flex-shrink: 0;
 }
  
-header h2,
+.pagina-formulario header h2,
 .encabezado-global h2 {
   font-family: var(--fuente-cuerpo);
   font-size: 1rem;
@@ -1437,18 +1312,10 @@ header h2,
   letter-spacing: 0.01em;
 }
 
-main,
-.contenedor-principal {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  min-height: calc(100vh - 120px);
-  padding: 48px 24px;
-}
  
 
-section,
-.seccion-formulario {
+.pagina-formulario section,
+.pagina-formulario .seccion-formulario {
   width: 100%;
   max-width: 480px;
   animation: aparecer 0.45s ease both;
@@ -1460,46 +1327,12 @@ section,
 }
  
 
-.formulario-iniciar-sesion,
-.formulario-Registro,
-form,
-#inicio-sesion > div,
-#Registrarse > div {
-  background: var(--blanco);
-  border-radius: var(--radio-lg);
-  padding: 44px 40px;
-  box-shadow: var(--sombra-media);
-  border: 1px solid var(--gris-200);
-  position: relative;
-  overflow: hidden;
-}
  
-.formulario-iniciar-sesion::after,
-.formulario-Registro::after,
-form::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, var(--verde-principal), var(--verde-claro));
-}
  
 
-form h2,
-.formulario-iniciar-sesion h2,
-.formulario-Registro h2 {
-  font-family: var(--fuente-titulo);
-  font-size: 1.85rem;
-  color: var(--azul-profundo);
-  margin-bottom: 28px;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
-}
  
 
-form > div,
+.pagina-formulario form > div,
 .formulario-iniciar-sesion > form > div,
 .formulario-Registro > form > div {
   display: flex;
@@ -1509,7 +1342,7 @@ form > div,
 }
  
 
-label {
+.pagina-formulario label {
   font-size: 0.82rem;
   font-weight: 600;
   color: var(--gris-700);
@@ -1517,11 +1350,11 @@ label {
   text-transform: uppercase;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="password"],
-input[type="tel"],
-input[type="number"] {
+.pagina-formulario input[type="text"],
+.pagina-formulario input[type="email"],
+.pagina-formulario input[type="password"],
+.pagina-formulario input[type="tel"],
+.pagina-formulario input[type="number"] {
   width: 100%;
   padding: 13px 16px;
   border: 1.5px solid var(--gris-200);
@@ -1534,24 +1367,24 @@ input[type="number"] {
   outline: none;
 }
  
-input::placeholder {
+.pagina-formulario input::placeholder {
   color: var(--gris-400);
   font-weight: 300;
 }
  
-input:hover {
+.pagina-formulario input:hover {
   border-color: var(--gris-400);
   background: var(--blanco);
 }
  
-input:focus {
+.pagina-formulario input:focus {
   border-color: var(--verde-principal);
   background: var(--blanco);
   box-shadow: 0 0 0 4px rgba(13, 110, 110, 0.10);
 }
  
 
-button[type="submit"],
+.pagina-formulario button[type="submit"],
 .btn-primario {
   width: 100%;
   padding: 15px 24px;
@@ -1570,7 +1403,7 @@ button[type="submit"],
   overflow: hidden;
 }
  
-button[type="submit"]::after,
+.pagina-formulario button[type="submit"]::after,
 .btn-primario::after {
   content: '';
   position: absolute;
@@ -1579,33 +1412,33 @@ button[type="submit"]::after,
   pointer-events: none;
 }
  
-button[type="submit"]:hover,
+.pagina-formulario button[type="submit"]:hover,
 .btn-primario:hover {
   background: var(--verde-claro);
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(13, 110, 110, 0.30);
 }
  
-button[type="submit"]:active,
+.pagina-formulario button[type="submit"]:active,
 .btn-primario:active {
   transform: translateY(0);
   box-shadow: none;
 }
  
 
-a {
+.pagina-formulario a {
   color: var(--verde-principal);
   text-decoration: none;
   font-weight: 500;
   transition: color var(--transicion);
 }
  
-a:hover {
+.pagina-formulario a:hover {
   color: var(--verde-claro);
   text-decoration: underline;
 }
  
-form a,
+.pagina-formulario form a,
 .formulario-iniciar-sesion a {
   font-size: 0.88rem;
   display: inline-block;
@@ -1613,10 +1446,10 @@ form a,
 }
  
 
-section > p,
+.pagina-formulario section > p,
 .formulario-iniciar-sesion + p,
 .formulario-Registro + p,
-form + p {
+.pagina-formulario form + p {
   text-align: center;
   margin-top: 20px;
   font-size: 0.9rem;
@@ -1628,15 +1461,6 @@ form + p {
   max-width: 600px;
 }
  
-.contenedor-roles {
-  background: var(--blanco);
-  border-radius: var(--radio-lg);
-  padding: 44px 40px;
-  box-shadow: var(--sombra-media);
-  border: 1px solid var(--gris-200);
-  position: relative;
-  overflow: hidden;
-}
  
 .contenedor-roles::after {
   content: '';
@@ -1646,13 +1470,6 @@ form + p {
   background: linear-gradient(90deg, var(--verde-principal), var(--acento));
 }
  
-.contenedor-roles h2 {
-  font-family: var(--fuente-titulo);
-  font-size: 1.85rem;
-  color: var(--azul-profundo);
-  margin-bottom: 6px;
-  letter-spacing: -0.02em;
-}
  
 .subtitulo {
   color: var(--gris-400);
@@ -1660,11 +1477,6 @@ form + p {
   margin-bottom: 32px;
 }
  
-.opciones-roles {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
  
 .tarjeta-rol {
   background: var(--gris-100);
@@ -1705,19 +1517,6 @@ form + p {
 }
  
 
-.tarjeta-perfil {
-  background: var(--blanco);
-  border-radius: var(--radio-lg);
-  padding: 44px 40px;
-  box-shadow: var(--sombra-media);
-  border: 1px solid var(--gris-200);
-  max-width: 420px;
-  width: 100%;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-  animation: aparecer 0.45s ease both;
-}
  
 .tarjeta-perfil::after {
   content: '';
@@ -1727,12 +1526,6 @@ form + p {
   background: linear-gradient(90deg, var(--verde-principal), var(--verde-claro));
 }
  
-.tarjeta-perfil h2 {
-  font-family: var(--fuente-titulo);
-  font-size: 1.6rem;
-  color: var(--azul-profundo);
-  margin-bottom: 24px;
-}
  
 .foto-ficticia {
   width: 100px !important;
@@ -1792,29 +1585,18 @@ form + p {
  
 
 @media (max-width: 600px) {
-  header,
+  .pagina-formulario header,
   .encabezado-global {
     padding: 20px 24px;
   }
  
-  main,
-  .contenedor-principal {
-    padding: 28px 16px;
-  }
- 
+  .pagina-formulario main,
   .formulario-iniciar-sesion,
-  .formulario-Registro,
-  form,
-  .contenedor-roles,
-  .tarjeta-perfil {
-    padding: 32px 24px;
-  }
- 
   .opciones-roles {
     grid-template-columns: 1fr;
   }
  
-  form h2,
+  .pagina-formulario form h2,
   .contenedor-roles h2,
   .tarjeta-perfil h2 {
     font-size: 1.5rem;
@@ -1822,10 +1604,9 @@ form + p {
 }
  
 @media (max-width: 380px) {
-  .formulario-iniciar-sesion,
-  .formulario-Registro,
-  form {
+  .pagina-formulario form,
+  .contenedor-roles,
+  .tarjeta-perfil {
     padding: 28px 18px;
   }
 }
-

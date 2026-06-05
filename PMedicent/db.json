@@ -5,6 +5,12 @@
       "nombre": "Rodrigo Lopez",
       "email": "rodrigo@medicent.com",
       "avatar": "https://img.icons8.com/ios-filled/50/000000/user-male-circle.png"
+    },
+    {
+      "nombre": "José Andrés Pachon Garay",
+      "email": "jose.pachon@gmail.com",
+      "avatar": "https://img.icons8.com/ios-filled/50/000000/user-male-circle.png",
+      "id": "IDKK1HOZXJQ"
     }
   ],
   "medicamentos": [
@@ -88,6 +94,28 @@
       "nota": "",
       "estado": "tomado",
       "id": "KKJHj85QBYc"
+    },
+    {
+      "usuarioId": 1,
+      "medicamento": "Metotrexato",
+      "dosis": "500",
+      "hora": "19:48",
+      "fecha": "2026-06-05",
+      "via": "Oral",
+      "nota": "",
+      "estado": "tomado",
+      "id": "ksjRj_9EXxo"
+    },
+    {
+      "usuarioId": 1,
+      "medicamento": "Metotrexato",
+      "dosis": "500mg",
+      "hora": "20:00",
+      "fecha": "2026-06-05",
+      "via": "Oral",
+      "nota": "",
+      "estado": "tomado",
+      "id": "rxOV1Nv_wiU"
     }
   ],
   "proximaToma": {

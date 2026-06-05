@@ -1,17 +1,21 @@
-function FormCard({ titulo, children }) {
+import Header from './Header'
+import Footer from './Footer'
+
+function TarjetaFormulario({ titulo, children, onSubmit }) {
   return (
-    <>
-    <main>
-      <section>
-        <form>
-          <h2>{titulo}</h2>
-          {children}
-        </form>
-      </section>
-    </main>
-    </>
-  );
-  
+    <div className="pagina-formulario">
+      <Header />
+      <main>
+        <section>
+          <form onSubmit={onSubmit}>
+            <h2>{titulo}</h2>
+            {children}
+          </form>
+        </section>
+      </main>
+      <Footer />
+    </div>
+  )
 }
 
-export default FormCard;
+export default TarjetaFormulario

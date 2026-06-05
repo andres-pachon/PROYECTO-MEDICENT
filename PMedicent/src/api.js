@@ -1,6 +1,6 @@
 const BASE_URL = 'http://localhost:3000';
 
-// ─── Utilidad base ────────────────────────────────────────────────────────────
+
 
 async function apiFetch(endpoint, options = {}) {
   const url = `${BASE_URL}${endpoint}`;
@@ -9,16 +9,30 @@ async function apiFetch(endpoint, options = {}) {
   };
   const res = await fetch(url, { ...defaults, ...options });
   if (!res.ok) throw new Error(`Error ${res.status}: ${res.statusText}`);
-  // DELETE devuelve 200 con {} vacío
   const text = await res.text();
   return text ? JSON.parse(text) : null;
 }
 
-// ─── USUARIO ─────────────────────────────────────────────────────────────────
-
 const API = {
 
-  // ── Tomas ──────────────────────────────────────────────────────────────────
+ 
+
+  async getUsuarios() {
+    return apiFetch('/usuarios');
+  },
+
+  async getUsuarioPorEmail(email) {
+    return apiFetch(`/usuarios?email=${encodeURIComponent(email)}`);
+  },
+
+  async crearUsuario(usuario) {
+    return apiFetch('/usuarios', {
+      method: 'POST',
+      body: JSON.stringify({ ...usuario, id: Date.now().toString() })
+    });
+  },
+
+  
 
   async getTomas() {
     return apiFetch('/tomas');
@@ -30,7 +44,6 @@ const API = {
   },
 
   async crearToma(toma) {
-    // Asigna id basado en timestamp si JSON Server no lo hace
     return apiFetch('/tomas', {
       method: 'POST',
       body: JSON.stringify({ ...toma, id: Date.now() })
@@ -41,7 +54,7 @@ const API = {
     return apiFetch(`/tomas/${id}`, { method: 'DELETE' });
   },
 
-  // ── Biomarcadores ──────────────────────────────────────────────────────────
+  
 
   async getBiomarcadores() {
     return apiFetch('/biomarcadores');
@@ -63,7 +76,7 @@ const API = {
     });
   },
 
-  // ── Inventario ─────────────────────────────────────────────────────────────
+ 
 
   async getInventario() {
     return apiFetch('/inventario');
@@ -76,36 +89,34 @@ const API = {
     });
   },
 
-  // ── Medicamentos ───────────────────────────────────────────────────────────
 
   async getMedicamentos() {
     return apiFetch('/medicamentos');
   },
 
-  // ── Tratamiento semanal ────────────────────────────────────────────────────
+  
 
   async getTratamientoSemana() {
     return apiFetch('/tratamientoSemana');
   },
 
-  // ── Rangos de biomarcadores ────────────────────────────────────────────────
+  
 
   async getRangos() {
     return apiFetch('/rangos');
   },
 
-  // ── Próxima toma ───────────────────────────────────────────────────────────
+  
 
   async getProximaToma() {
     return apiFetch('/proximaToma');
   },
 
-  // ── Consumo ────────────────────────────────────────────────────────────────
+  
 
   async getConsumo() {
     return apiFetch('/consumo');
   }
 };
-
 
 export default API;

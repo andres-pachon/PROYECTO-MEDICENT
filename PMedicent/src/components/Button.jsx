@@ -1,13 +1,9 @@
-function Button({ texto, onClick }) {
+function Button({ texto, onClick, type = 'submit' }) {
   return (
-    <>
-    <button type="submit" onClick={onClick}>
+    <button type={type} onClick={onClick}>
       {texto}
     </button>
-
-    </>
-  );
-  
+  )
 }
 
-export default Button;
+export default Button

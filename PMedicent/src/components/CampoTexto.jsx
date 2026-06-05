@@ -1,6 +1,5 @@
-function InputField({ label, id, type = "text", placeholder, required }) {
+function CampoTexto({ label, id, type = 'text', placeholder, required, value, onChange }) {
   return (
-    <>
     <div>
       <label htmlFor={id}>{label}</label>
       <input
@@ -8,10 +7,11 @@ function InputField({ label, id, type = "text", placeholder, required }) {
         id={id}
         placeholder={placeholder}
         required={required}
+        value={value}
+        onChange={onChange}
       />
     </div>
-    </>
-  );
+  )
 }
 
-export default InputField;
+export default CampoTexto
