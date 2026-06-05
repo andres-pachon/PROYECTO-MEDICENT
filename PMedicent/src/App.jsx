@@ -11,6 +11,8 @@ import DatosMedicosPaciente from './pages/DatosMedicosPaciente'
 import DatosPersonalesCuidador from './pages/DatosPersonalesCuidador'
 import PerfilCuidador from './pages/PerfilCuidador'
 import EditarPerfil from './pages/EditarPerfil'
+import Tratamiento from './pages/Tratamiento'
+import Biomarcadores from './pages/Biomarcadores'
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
       <Route path="/datos-personales-cuidador" element={<DatosPersonalesCuidador />} />
       <Route path="/perfil-cuidador" element={<PerfilCuidador />} />
       <Route path="/editar-perfil" element={<EditarPerfil />} />
+      <Route path="/tratamiento" element={<Tratamiento />} />
+      <Route path="/tomar-biomarcadores" element={<Biomarcadores />} />
     </Routes>
   )
 }

@@ -1,7 +1,6 @@
 const BASE_URL = 'http://localhost:3000';
 
 
-
 async function apiFetch(endpoint, options = {}) {
   const url = `${BASE_URL}${endpoint}`;
   const defaults = {
@@ -9,13 +8,14 @@ async function apiFetch(endpoint, options = {}) {
   };
   const res = await fetch(url, { ...defaults, ...options });
   if (!res.ok) throw new Error(`Error ${res.status}: ${res.statusText}`);
+  // DELETE devuelve 200 con {} vacío
   const text = await res.text();
   return text ? JSON.parse(text) : null;
 }
 
+
 const API = {
 
- 
 
   async getUsuarios() {
     return apiFetch('/usuarios');
@@ -32,7 +32,6 @@ const API = {
     });
   },
 
-  
 
   async getTomas() {
     return apiFetch('/tomas');
@@ -54,7 +53,6 @@ const API = {
     return apiFetch(`/tomas/${id}`, { method: 'DELETE' });
   },
 
-  
 
   async getBiomarcadores() {
     return apiFetch('/biomarcadores');
@@ -76,7 +74,6 @@ const API = {
     });
   },
 
- 
 
   async getInventario() {
     return apiFetch('/inventario');
@@ -94,10 +91,31 @@ const API = {
     return apiFetch('/medicamentos');
   },
 
-  
+  async crearMedicamento(medicamento) {
+    return apiFetch('/medicamentos', {
+      method: 'POST',
+      body: JSON.stringify({ ...medicamento, id: Date.now().toString() })
+    });
+  },
+
+  async eliminarMedicamento(id) {
+    return apiFetch(`/medicamentos/${id}`, { method: 'DELETE' });
+  },
+
 
   async getTratamientoSemana() {
     return apiFetch('/tratamientoSemana');
+  },
+
+  async crearTratamientoSemana(entrada) {
+    return apiFetch('/tratamientoSemana', {
+      method: 'POST',
+      body: JSON.stringify({ ...entrada, id: Date.now().toString() })
+    });
+  },
+
+  async eliminarTratamientoSemana(id) {
+    return apiFetch(`/tratamientoSemana/${id}`, { method: 'DELETE' });
   },
 
   
@@ -117,6 +135,7 @@ const API = {
   async getConsumo() {
     return apiFetch('/consumo');
   }
+
 };
 
 export default API;
