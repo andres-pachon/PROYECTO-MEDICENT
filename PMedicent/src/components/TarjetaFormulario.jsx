@@ -1,12 +1,12 @@
-import Header from './Header'
-import Footer from './Footer'
+import Header from './Header';
+import Footer from './Footer';
 
 function TarjetaFormulario({ titulo, children, onSubmit }) {
   return (
     <div className="pagina-formulario">
       <Header />
       <main>
-        <section>
+        <section className="formulario-contenido">
           <form onSubmit={onSubmit}>
             <h2>{titulo}</h2>
             {children}
@@ -15,7 +15,7 @@ function TarjetaFormulario({ titulo, children, onSubmit }) {
       </main>
       <Footer />
     </div>
-  )
+  );
 }
 
-export default TarjetaFormulario
+export default TarjetaFormulario;

@@ -1,41 +1,43 @@
-import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
-import API from '../api'
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import API from '../api';
 
 function SesionIniciada() {
-  const [horaActual, setHoraActual] = useState('')
-  const [usuario, setUsuario] = useState({ nombre: 'Cargando...' })
-  const [proximaToma, setProximaToma] = useState(null)
-  const [tomasHoy, setTomasHoy] = useState([])
+  const [horaActual, setHoraActual] = useState('');
+  const [usuario, setUsuario] = useState({ nombre: 'Cargando...' });
+  const [proximaToma, setProximaToma] = useState(null);
+  const [tomasHoy, setTomasHoy] = useState([]);
 
   useEffect(() => {
     const actualizarReloj = () => {
-      const ahora = new Date()
-      const horas = ahora.getHours().toString().padStart(2, '0')
-      const minutos = ahora.getMinutes().toString().padStart(2, '0')
-      setHoraActual(`${horas}:${minutos}`)
-    }
-    actualizarReloj()
-    const interval = setInterval(actualizarReloj, 60000)
-    return () => clearInterval(interval)
-  }, [])
+      const ahora = new Date();
+      const horas = ahora.getHours().toString().padStart(2, '0');
+      const minutos = ahora.getMinutes().toString().padStart(2, '0');
+      setHoraActual(`${horas}:${minutos}`);
+    };
+    actualizarReloj();
+    const interval = setInterval(actualizarReloj, 60000);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     const cargarDatosDashboard = async () => {
       try {
-        const proxData = await API.getProximaToma()
-        setProximaToma(proxData)
-        const tomasData = await API.getTomas()
-        setTomasHoy(tomasData)
-        setUsuario({ nombre: 'Rodrigo López' })
+        const proxData = await API.getProximaToma();
+        setProximaToma(proxData);
+        
+        const tomasData = await API.getTomasHoy(); // Mejor usar tomas de hoy
+        setTomasHoy(tomasData);
+        
+        setUsuario({ nombre: 'Rodrigo López' });
       } catch (error) {
-        console.error('Error al cargar los datos del dashboard:', error)
+        console.error('Error al cargar los datos del dashboard:', error);
       }
-    }
-    cargarDatosDashboard()
-  }, [])
+    };
+    cargarDatosDashboard();
+  }, []);
 
   return (
     <>
@@ -68,16 +70,20 @@ function SesionIniciada() {
           </div>
         )}
 
+        {/* Acciones del Dashboard - Actualizado */}
         <div className="acciones-dashboard">
           <div className="acciones-grid">
             <Link to="/registrar-toma" className="btn-accion">
               Registrar Toma
             </Link>
-            <Link to="/mis-suministros" className="btn-accion">
-              Mis Suministros
+            <Link to="/tratamiento" className="btn-accion">
+              Ver Tratamiento
             </Link>
             <Link to="/tomar-biomarcadores" className="btn-accion">
-              Tomar Biomarcadores
+              Biomarcadores
+            </Link>
+            <Link to="/editar-perfil" className="btn-accion">
+              Editar Perfil
             </Link>
           </div>
         </div>
@@ -123,7 +129,7 @@ function SesionIniciada() {
       </main>
       <Footer />
     </>
-  )
+  );
 }
 
-export default SesionIniciada
+export default SesionIniciada;

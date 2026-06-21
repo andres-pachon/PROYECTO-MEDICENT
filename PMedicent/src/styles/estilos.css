@@ -1610,3 +1610,69 @@ html {
     padding: 28px 18px;
   }
 }
+
+/* ====================== LAYOUT GENERAL + FOOTER FIJO ====================== */
+
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+.pagina-formulario {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #f8fafc;
+}
+
+/* Empuja el footer hacia abajo */
+.pagina-formulario main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+/* Footer siempre abajo */
+.footer {
+    background-color: #1d3b5e;
+    color: white;
+    padding: 25px 0;
+    margin-top: auto;
+    width: 100%;
+}
+
+.footer .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.footer-links {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    color: #14b8a6;
+}
+
+/* Quitar scroll innecesario */
+body::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    scrollbar-width: none;
+}
