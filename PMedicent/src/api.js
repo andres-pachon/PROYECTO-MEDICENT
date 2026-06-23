@@ -1,5 +1,4 @@
-const BASE_URL = 'http://localhost:3000';
-
+const BASE_URL = 'http://127.0.0.1:5000/api';
 
 async function apiFetch(endpoint, options = {}) {
   const url = `${BASE_URL}${endpoint}`;
@@ -7,15 +6,36 @@ async function apiFetch(endpoint, options = {}) {
     headers: { 'Content-Type': 'application/json' }
   };
   const res = await fetch(url, { ...defaults, ...options });
-  if (!res.ok) throw new Error(`Error ${res.status}: ${res.statusText}`);
-  // DELETE devuelve 200 con {} vacío
+  
+  if (!res.ok) {
+    // Intentamos capturar el mensaje de error específico que envía Flask si existe
+    const errorData = await res.json().catch(() => ({}));
+    throw new Error(errorData.mensaje || `Error ${res.status}: ${res.statusText}`);
+  }
+  
   const text = await res.text();
   return text ? JSON.parse(text) : null;
 }
 
-
 const API = {
 
+  // ==========================================
+  // AUTENTICACIÓN (Flask + MySQL)
+  // ==========================================
+
+  async login(correo, password) {
+    return apiFetch('/login', {
+      method: 'POST',
+      body: JSON.stringify({ correo, password })
+    });
+  },
+
+  async crearUsuario(usuario) {
+    return apiFetch('/register', {
+      method: 'POST',
+      body: JSON.stringify(usuario) // Ya no lleva id manual (Date.now()), MySQL lo autoincrementa
+    });
+  },
 
   async getUsuarios() {
     return apiFetch('/usuarios');
@@ -25,13 +45,9 @@ const API = {
     return apiFetch(`/usuarios?email=${encodeURIComponent(email)}`);
   },
 
-  async crearUsuario(usuario) {
-    return apiFetch('/usuarios', {
-      method: 'POST',
-      body: JSON.stringify({ ...usuario, id: Date.now().toString() })
-    });
-  },
-
+  // ==========================================
+  // TOMAS DE MEDICAMENTOS
+  // ==========================================
 
   async getTomas() {
     return apiFetch('/tomas');
@@ -53,6 +69,9 @@ const API = {
     return apiFetch(`/tomas/${id}`, { method: 'DELETE' });
   },
 
+  // ==========================================
+  // BIOMARCADORES
+  // ==========================================
 
   async getBiomarcadores() {
     return apiFetch('/biomarcadores');
@@ -74,6 +93,9 @@ const API = {
     });
   },
 
+  // ==========================================
+  // INVENTARIO Y MEDICAMENTOS
+  // ==========================================
 
   async getInventario() {
     return apiFetch('/inventario');
@@ -85,7 +107,6 @@ const API = {
       body: JSON.stringify(datos)
     });
   },
-
 
   async getMedicamentos() {
     return apiFetch('/medicamentos');
@@ -102,6 +123,9 @@ const API = {
     return apiFetch(`/medicamentos/${id}`, { method: 'DELETE' });
   },
 
+  // ==========================================
+  // TRATAMIENTOS Y CONSUMO
+  // ==========================================
 
   async getTratamientoSemana() {
     return apiFetch('/tratamientoSemana');
@@ -118,19 +142,13 @@ const API = {
     return apiFetch(`/tratamientoSemana/${id}`, { method: 'DELETE' });
   },
 
-  
-
   async getRangos() {
     return apiFetch('/rangos');
   },
 
-  
-
   async getProximaToma() {
     return apiFetch('/proximaToma');
   },
-
-  
 
   async getConsumo() {
     return apiFetch('/consumo');
