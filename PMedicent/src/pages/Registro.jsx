@@ -10,7 +10,7 @@ function Registro() {
   const [form, setForm] = useState({
     nombre: '', 
     apellido: '', 
-    idTipoDocumento: '1', // Por defecto 1 (Cédula de Ciudadanía)
+    idTipoDocumento: '1',
     documento: '',
     fechaNacimiento: '',
     correo: '', 
@@ -39,22 +39,26 @@ function Registro() {
     }
 
     setCargando(true)
+
     try {
-      // Ahora enviamos los datos reales capturados del formulario
-      await API.crearUsuario({
-        nombre: form.nombre,
-        apellido: form.apellido,
+      console.log("Enviando datos al backend:", form)
+
+      const respuesta = await API.crearUsuario({
+        nombre: `${form.nombre} ${form.apellido}`.trim(),
         correo: form.correo,
-        password: form.contrasena, 
-        idTipoDocumento: parseInt(form.idTipoDocumento), // Lo convertimos a número para Flask
+        password: form.contrasena,
+        idTipoDocumento: parseInt(form.idTipoDocumento),
         documento: form.documento,
-        fechaNacimiento: form.fechaNacimiento // El input 'date' ya viene en formato YYYY-MM-DD
+        fechaNacimiento: form.fechaNacimiento
       })
 
+      console.log("Respuesta del servidor:", respuesta)
+      alert("¡Registro exitoso! Ahora puedes iniciar sesión.")
       navigate('/elegir-rol')
+
     } catch (err) {
-      console.error('Error al registrar:', err)
-      setError(err.message || 'Hubo un error al registrar en el servidor.')
+      console.error("Error completo:", err)
+      setError(err.message || 'No se pudo registrar. Verifica que el backend esté corriendo.')
     } finally {
       setCargando(false)
     }
@@ -65,14 +69,15 @@ function Registro() {
       <CampoTexto label="Nombre" id="nombre" placeholder="Ingrese su nombre" required value={form.nombre} onChange={handleChange} />
       <CampoTexto label="Apellido" id="apellido" placeholder="Ingrese su apellido" required value={form.apellido} onChange={handleChange} />
       
-      {/* Nuevo campo: Tipo de Documento */}
       <div style={{ marginBottom: '12px' }}>
-        <label htmlFor="idTipoDocumento" style={{ display: 'block', marginBottom: '4px', fontSize: '0.9rem', fontWeight: 'bold' }}>TIPO DE DOCUMENTO</label>
+        <label htmlFor="idTipoDocumento" style={{ display: 'block', marginBottom: '4px', fontWeight: 'bold' }}>
+          TIPO DE DOCUMENTO
+        </label>
         <select 
           id="idTipoDocumento" 
           value={form.idTipoDocumento} 
           onChange={handleChange}
-          style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid #ccc' }}
+          style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '2px solid #e2e8f0' }}
           required
         >
           <option value="1">Cédula de Ciudadanía</option>
@@ -81,17 +86,14 @@ function Registro() {
         </select>
       </div>
 
-      {/* Nuevo campo: Documento */}
       <CampoTexto label="Número de Documento" id="documento" placeholder="Ingrese su documento" required value={form.documento} onChange={handleChange} />
-      
-      {/* Nuevo campo: Fecha de Nacimiento */}
       <CampoTexto label="Fecha de Nacimiento" id="fechaNacimiento" type="date" required value={form.fechaNacimiento} onChange={handleChange} />
-
       <CampoTexto label="Correo" id="correo" type="email" placeholder="Ingrese su correo" required value={form.correo} onChange={handleChange} />
       <CampoTexto label="Contraseña" id="contrasena" type="password" placeholder="Mínimo 6 caracteres" required value={form.contrasena} onChange={handleChange} />
       <CampoTexto label="Confirmar Contraseña" id="confirmar" type="password" placeholder="Repita la contraseña" required value={form.confirmar} onChange={handleChange} />
       
-      {error && <p style={{ color: 'red', fontSize: '0.9rem', marginTop: '4px' }}>{error}</p>}
+      {error && <p style={{ color: 'red', textAlign: 'center', margin: '10px 0' }}>{error}</p>}
+      
       <Button texto={cargando ? 'Registrando...' : 'Confirmar'} />
       <p>¿Ya tienes una cuenta? <Link to="/inicio-sesion">Inicia sesión</Link></p>
     </TarjetaFormulario>

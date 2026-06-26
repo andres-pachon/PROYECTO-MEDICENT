@@ -1676,3 +1676,46 @@ body::-webkit-scrollbar {
 body {
     scrollbar-width: none;
 }
+/* ====================== FORZAR NAVBAR CONSISTENTE ====================== */
+.navbar {
+    background-color: #1d3b5e !important;
+    padding: 16px 0 !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1000 !important;
+}
+
+.navbar .container {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.logo {
+    color: white !important;
+    font-size: 1.5rem !important;
+    font-weight: bold !important;
+    text-decoration: none !important;
+}
+
+.nav-links {
+    display: flex !important;
+    list-style: none !important;
+    gap: 20px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.nav-links a {
+    color: white !important;
+    text-decoration: none !important;
+    font-weight: 500 !important;
+}
+
+.nav-links a:hover {
+    color: #14b8a6 !important;
+}

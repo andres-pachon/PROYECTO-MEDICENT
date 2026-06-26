@@ -10,6 +10,7 @@ function SesionIniciada() {
   const [proximaToma, setProximaToma] = useState(null);
   const [tomasHoy, setTomasHoy] = useState([]);
 
+  // Reloj en tiempo real
   useEffect(() => {
     const actualizarReloj = () => {
       const ahora = new Date();
@@ -22,20 +23,31 @@ function SesionIniciada() {
     return () => clearInterval(interval);
   }, []);
 
+  // Cargar datos reales del usuario y dashboard
   useEffect(() => {
     const cargarDatosDashboard = async () => {
       try {
+        // Cargar usuario real desde la API
+        const usuarios = await API.getUsuarios();
+        const usuarioActual = usuarios.find(u => u.id === "1") || usuarios[0];
+
+        if (usuarioActual) {
+          setUsuario({ nombre: usuarioActual.nombre || 'Usuario' });
+        }
+
+        // Cargar demás datos
         const proxData = await API.getProximaToma();
         setProximaToma(proxData);
         
-        const tomasData = await API.getTomasHoy(); // Mejor usar tomas de hoy
+        const tomasData = await API.getTomasHoy();
         setTomasHoy(tomasData);
-        
-        setUsuario({ nombre: 'Rodrigo López' });
+
       } catch (error) {
         console.error('Error al cargar los datos del dashboard:', error);
+        setUsuario({ nombre: 'Rodrigo López' }); // fallback
       }
     };
+    
     cargarDatosDashboard();
   }, []);
 
@@ -70,7 +82,6 @@ function SesionIniciada() {
           </div>
         )}
 
-        {/* Acciones del Dashboard - Actualizado */}
         <div className="acciones-dashboard">
           <div className="acciones-grid">
             <Link to="/registrar-toma" className="btn-accion">
