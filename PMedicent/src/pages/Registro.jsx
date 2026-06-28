@@ -44,13 +44,14 @@ function Registro() {
       console.log("Enviando datos al backend:", form)
 
       const respuesta = await API.crearUsuario({
-        nombre: `${form.nombre} ${form.apellido}`.trim(),
-        correo: form.correo,
-        password: form.contrasena,
-        idTipoDocumento: parseInt(form.idTipoDocumento),
-        documento: form.documento,
-        fechaNacimiento: form.fechaNacimiento
-      })
+      nombre: form.nombre,          
+      apellido: form.apellido,       
+      correo: form.correo,
+      password: form.contrasena,
+      idTipoDocumento: parseInt(form.idTipoDocumento),
+      documento: form.documento,
+      fechaNacimiento: form.fechaNacimiento
+    })
 
       console.log("Respuesta del servidor:", respuesta)
       alert("¡Registro exitoso! Ahora puedes iniciar sesión.")
