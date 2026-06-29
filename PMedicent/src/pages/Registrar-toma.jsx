@@ -32,28 +32,27 @@ function RegistrarToma() {
   }
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    try {
-      const nuevaToma = {
-        usuarioId: 1,
-        medicamento: form.medicamento,
-        dosis: form.dosis,
-        hora: form.hora,
-        fecha: new Date().toISOString().split('T')[0],
-        via: 'Oral',
-        nota: form.nota,
-        estado: 'tomado'
-      }
-      await API.crearToma(nuevaToma)
-      setMensajeExito(true)
-      setTimeout(() => {
-        navigate('/dashboard')
-      }, 2000)
-    } catch (error) {
-      console.error('Error al registrar la toma:', error)
-      alert('Hubo un error al guardar la toma. Inténtalo de nuevo.')
+  e.preventDefault()
+  try {
+    const nuevaToma = {
+      fecha: new Date().toISOString().split('T')[0],
+      hora: form.hora,
+      dosis: form.dosis,
+      nota: form.nota,
+      estado: 'tomado',
+      idMedicamento: medicamentos.find(m => m.nombre === form.medicamento)?.id,
+      idPaciente: 1
     }
+    await API.crearToma(nuevaToma)
+    setMensajeExito(true)
+    setTimeout(() => {
+      navigate('/dashboard')
+    }, 2000)
+  } catch (error) {
+    console.error('Error al registrar la toma:', error)
+    alert('Hubo un error al guardar la toma. Inténtalo de nuevo.')
   }
+}
 
   return (
     <>

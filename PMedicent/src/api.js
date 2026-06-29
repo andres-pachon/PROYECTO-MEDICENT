@@ -26,7 +26,7 @@ const API = {
   async login(correo, password) {
     return apiFetch('/login', {
       method: 'POST',
-      body: JSON.stringify({ correo, password })
+      body: JSON.stringify({ email: correo, password })
     });
   },
 

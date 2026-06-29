@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import API from '../api';
 
 function SesionIniciada() {
+  const navigate = useNavigate();
   const [horaActual, setHoraActual] = useState('');
-  const [usuario, setUsuario] = useState({ nombre: 'Cargando...' });
+  const [usuario, setUsuario] = useState(null);
   const [proximaToma, setProximaToma] = useState(null);
   const [tomasHoy, setTomasHoy] = useState([]);
 
@@ -23,31 +25,36 @@ function SesionIniciada() {
     return () => clearInterval(interval);
   }, []);
 
-  // Cargar datos reales del usuario y dashboard
+  // Cargar usuario desde localStorage
+  useEffect(() => {
+    const userData = localStorage.getItem('usuario');
+    if (!userData) {
+      navigate('/inicio-sesion');
+      return;
+    }
+    setUsuario(JSON.parse(userData));
+  }, []);
+
+  // Cargar datos del dashboard (separados para que uno no bloquee al otro)
   useEffect(() => {
     const cargarDatosDashboard = async () => {
+      // Tomas de hoy
       try {
-        // Cargar usuario real desde la API
-        const usuarios = await API.getUsuarios();
-        const usuarioActual = usuarios.find(u => u.id === "1") || usuarios[0];
-
-        if (usuarioActual) {
-          setUsuario({ nombre: usuarioActual.nombre || 'Usuario' });
-        }
-
-        // Cargar demás datos
-        const proxData = await API.getProximaToma();
-        setProximaToma(proxData);
-        
         const tomasData = await API.getTomasHoy();
         setTomasHoy(tomasData);
-
       } catch (error) {
-        console.error('Error al cargar los datos del dashboard:', error);
-        setUsuario({ nombre: 'Rodrigo López' }); // fallback
+        console.error('Error al cargar tomas:', error);
+      }
+
+      // Próxima toma (endpoint aún no existe, se ignora sin romper el dashboard)
+      try {
+        const proxData = await API.getProximaToma();
+        setProximaToma(proxData);
+      } catch (error) {
+        console.error('proximaToma no disponible aún:', error);
       }
     };
-    
+
     cargarDatosDashboard();
   }, []);
 
@@ -61,7 +68,7 @@ function SesionIniciada() {
               src="https://img.icons8.com/ios-filled/50/1d3b5e/user-male-circle.png"
               alt="Avatar usuario"
             />
-            <span>Bienvenido, {usuario.nombre}</span>
+            <span>Bienvenido, {usuario?.nombre} {usuario?.apellido}</span>
           </div>
           <div className="reloj">{horaActual || '00:00'}</div>
         </div>
@@ -84,18 +91,10 @@ function SesionIniciada() {
 
         <div className="acciones-dashboard">
           <div className="acciones-grid">
-            <Link to="/registrar-toma" className="btn-accion">
-              Registrar Toma
-            </Link>
-            <Link to="/tratamiento" className="btn-accion">
-              Ver Tratamiento
-            </Link>
-            <Link to="/tomar-biomarcadores" className="btn-accion">
-              Biomarcadores
-            </Link>
-            <Link to="/editar-perfil" className="btn-accion">
-              Editar Perfil
-            </Link>
+            <Link to="/registrar-toma" className="btn-accion">Registrar Toma</Link>
+            <Link to="/tratamiento" className="btn-accion">Ver Tratamiento</Link>
+            <Link to="/tomar-biomarcadores" className="btn-accion">Biomarcadores</Link>
+            <Link to="/editar-perfil" className="btn-accion">Editar Perfil</Link>
           </div>
         </div>
 

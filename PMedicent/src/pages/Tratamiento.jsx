@@ -9,13 +9,11 @@ const DIAS_LABEL = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sába
 
 function Tratamiento() {
   const navigate = useNavigate()
-  const [usuario] = useState({ nombre: 'Rodrigo Lopez' })
-  const [tratamiento, setTratamiento] = useState([])
-  const [consumo, setConsumo] = useState(null)
+  const usuarioData = JSON.parse(localStorage.getItem('usuario') || '{}')
+  const [usuario] = useState({ nombre: `${usuarioData.nombre || ''} ${usuarioData.apellido || ''}`.trim() })
   const [medicamentos, setMedicamentos] = useState([])
   const [cargando, setCargando] = useState(true)
 
-  
   const [modalAbierto, setModalAbierto] = useState(false)
   const [form, setForm] = useState({
     nombre: '', dosis: '', via: 'Oral', horario: '', duracion: '', frecuencia: 'Diario'
@@ -33,32 +31,14 @@ function Tratamiento() {
   const cargarDatos = async () => {
     setCargando(true)
     try {
-      const [trat, cons, meds] = await Promise.all([
-        API.getTratamientoSemana(),
-        API.getConsumo(),
-        API.getMedicamentos()
-      ])
-      setTratamiento(trat)
-      setConsumo(cons)
+      const meds = await API.getMedicamentos()
       setMedicamentos(meds)
     } catch (err) {
-      console.error('Error cargando tratamiento:', err)
+      console.error('Error cargando medicamentos:', err)
     } finally {
       setCargando(false)
     }
   }
-
-  
-  const horasUnicas = [...new Set(tratamiento.map(t => t.hora))].sort()
-
-  const getCelda = (hora, dia) => {
-    return tratamiento.filter(t => t.hora === hora && t.dia === dia)
-  }
-
-  
-  const porcentaje = consumo?.porcentaje ?? 0
-  const circunferencia = 94.2
-  const dashoffset = circunferencia - (circunferencia * porcentaje) / 100
 
   const handleChange = (e) => setForm({ ...form, [e.target.id]: e.target.value })
 
@@ -70,10 +50,6 @@ function Tratamiento() {
     e.preventDefault()
     setErrorForm('')
 
-    const frecuenciaFinal = form.frecuencia === 'Días específicos'
-      ? diasSel.map(d => DIAS_LABEL[DIAS.indexOf(d)]).join(', ')
-      : form.frecuencia
-
     if (form.frecuencia === 'Días específicos' && diasSel.length === 0) {
       setErrorForm('Selecciona al menos un día.')
       return
@@ -81,31 +57,14 @@ function Tratamiento() {
 
     setGuardando(true)
     try {
-      
-      const nuevoMed = await API.crearMedicamento({
-        usuarioId: 1,
+      await API.crearMedicamento({
         nombre: form.nombre,
         dosis: form.dosis,
         via: form.via,
-        frecuencia: frecuenciaFinal,
+        frecuencia: form.frecuencia,
         horario: form.horario,
         duracion: form.duracion,
-        estado: 'activo'
       })
-
-     
-      const diasParaAgregar = form.frecuencia === 'Días específicos'
-        ? diasSel
-        : form.frecuencia === 'Diario' ? DIAS : []
-
-      for (const dia of diasParaAgregar) {
-        await API.crearTratamientoSemana({
-          dia,
-          hora: form.horario,
-          medicamento: form.nombre,
-          medicamentoId: nuevoMed.id
-        })
-      }
 
       setModalAbierto(false)
       setForm({ nombre: '', dosis: '', via: 'Oral', horario: '', duracion: '', frecuencia: 'Diario' })
@@ -113,7 +72,7 @@ function Tratamiento() {
       await cargarDatos()
     } catch (err) {
       console.error(err)
-      setErrorForm('Error al guardar. Verifica que json-server esté corriendo.')
+      setErrorForm('Error al guardar el medicamento.')
     } finally {
       setGuardando(false)
     }
@@ -125,7 +84,6 @@ function Tratamiento() {
       <main>
         <div className="tratamiento-container">
 
-          
           <div className="tratamiento-usuario">
             <img
               src="https://img.icons8.com/ios-filled/50/000000/user-male-circle.png"
@@ -136,43 +94,33 @@ function Tratamiento() {
           </div>
 
           <h1 className="tratamiento-titulo">Tratamiento</h1>
-          <p className="tratamiento-subtitulo">Esta semana</p>
+          <p className="tratamiento-subtitulo">Medicamentos registrados</p>
 
-          
           {cargando ? (
-            <p style={{ textAlign: 'center', padding: '20px' }}>Cargando tratamiento...</p>
+            <p style={{ textAlign: 'center', padding: '20px' }}>Cargando medicamentos...</p>
           ) : (
             <div className="calendar-table-container">
               <table className="calendar-table">
                 <thead>
                   <tr>
-                    <th className="hora-header"></th>
-                    {DIAS_LABEL.map(d => <th key={d}>{d}</th>)}
+                    <th>Medicamento</th>
+                    <th>Dosis</th>
+                    <th>Frecuencia diaria</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {horasUnicas.length === 0 ? (
+                  {medicamentos.length === 0 ? (
                     <tr>
-                      <td colSpan={8} style={{ textAlign: 'center', padding: '24px', color: '#888' }}>
-                        No hay medicamentos en el tratamiento esta semana.
+                      <td colSpan={3} style={{ textAlign: 'center', padding: '24px', color: '#888' }}>
+                        No hay medicamentos registrados.
                       </td>
                     </tr>
                   ) : (
-                    horasUnicas.map(hora => (
-                      <tr key={hora}>
-                        <td className="hora-header">{hora}</td>
-                        {DIAS.map(dia => {
-                          const celdas = getCelda(hora, dia)
-                          return (
-                            <td key={dia}>
-                              {celdas.map(c => (
-                                <div key={c.id} className="medicamento-celda">
-                                  <span className="med-nombre">{c.medicamento}</span>
-                                </div>
-                              ))}
-                            </td>
-                          )
-                        })}
+                    medicamentos.map(med => (
+                      <tr key={med.id}>
+                        <td>{med.nombre}</td>
+                        <td>{med.dosis}</td>
+                        <td>{med.frecuenciaDiaria} vez/día</td>
                       </tr>
                     ))
                   )}
@@ -181,69 +129,20 @@ function Tratamiento() {
             </div>
           )}
 
-          
           <div className="botones-tratamiento">
-            <button
-              className="btn btn-primary"
-              onClick={() => setModalAbierto(true)}
-            >
+            <button className="btn btn-primary" onClick={() => setModalAbierto(true)}>
               <img src="https://img.icons8.com/ios-filled/24/ffffff/plus.png" alt="add" />
               Agregar Medicamento
             </button>
-            <button
-              className="btn btn-primary"
-              onClick={() => navigate('/registrar-toma')}
-            >
+            <button className="btn btn-primary" onClick={() => navigate('/registrar-toma')}>
               <img src="https://img.icons8.com/ios-filled/24/ffffff/pill.png" alt="pills" />
               Registrar Toma
             </button>
           </div>
 
-          
-          {consumo && (
-            <div className="consumo-card">
-              <h2 className="consumo-title">Consumo</h2>
-              <div className="consumo-content">
-                <div className="pie-chart">
-                  <svg width="180" height="180" viewBox="0 0 42 42">
-                    <circle cx="21" cy="21" r="15" fill="none" stroke="#e5e7eb" strokeWidth="8" />
-                    <circle
-                      cx="21" cy="21" r="15" fill="none"
-                      stroke="#14b8a6"
-                      strokeWidth="8"
-                      strokeDasharray={circunferencia}
-                      strokeDashoffset={dashoffset}
-                      strokeLinecap="round"
-                      style={{ transform: 'rotate(-90deg)', transformOrigin: '50% 50%' }}
-                    />
-                    <text x="21" y="21" textAnchor="middle" dominantBaseline="middle"
-                      fontSize="7" fontWeight="bold" fill="#1d3b5e">
-                      {consumo.porcentaje}%
-                    </text>
-                  </svg>
-                </div>
-                <div className="consumo-info">
-                  <p className="consumo-text">
-                    Has consumido el <strong>{consumo.porcentaje}%</strong> del suministro de <strong>{consumo.medicamento}</strong>
-                  </p>
-                  <p className="compra-text">
-                    Debes comprar {consumo.medicamento} el día:<br />
-                    <strong>{consumo.fechaCompra}</strong>
-                  </p>
-                </div>
-              </div>
-              <div className="text-center">
-                <button className="btn-inventario" onClick={() => navigate('/mis-suministros')}>
-                  Ver Inventario
-                </button>
-              </div>
-            </div>
-          )}
-
         </div>
       </main>
 
-      
       {modalAbierto && (
         <div className="modal" style={{ display: 'flex' }}>
           <div className="modal-content">

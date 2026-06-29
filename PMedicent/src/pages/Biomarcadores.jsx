@@ -4,13 +4,16 @@ import Footer from '../components/Footer'
 import API from '../api'
 
 const TIPOS = {
-  fc:     { label: 'Frecuencia Cardíaca', unidad: 'lpm' },
-  spo2:   { label: 'Saturación de Oxígeno (SpO2)', unidad: '%' },
-  temp:   { label: 'Temperatura', unidad: '°C' },
+  fc:      { label: 'Frecuencia Cardíaca', unidad: 'lpm' },
+  spo2:    { label: 'Saturación de Oxígeno (SpO2)', unidad: '%' },
+  temp:    { label: 'Temperatura', unidad: '°C' },
   glucosa:{ label: 'Glucosa', unidad: 'mg/dL' }
 }
 
 function Biomarcadores() {
+  const usuarioData = JSON.parse(localStorage.getItem('usuario') || '{}')
+  const nombreCompleto = `${usuarioData.nombre || ''} ${usuarioData.apellido || ''}`.trim()
+
   const [biomarcadoresHoy, setBiomarcadoresHoy] = useState([])
   const [bioMes, setBioMes] = useState([])
   const [rangos, setRangos] = useState(null)
@@ -22,7 +25,6 @@ function Biomarcadores() {
   const mesActual = hoy.toLocaleString('es-CO', { month: 'long' })
   const anioActual = hoy.getFullYear()
 
-  
   const [form, setForm] = useState({
     tipo: '',
     valor: '',
@@ -54,7 +56,6 @@ function Biomarcadores() {
     }
   }
 
- 
   const calcularEstado = () => {
     if (!rangos || biomarcadoresHoy.length === 0) return null
     const hayAlerta = biomarcadoresHoy.some(b => {
@@ -67,7 +68,6 @@ function Biomarcadores() {
 
   const estadoPaciente = calcularEstado()
 
- 
   const handleTipoChange = (e) => {
     const tipo = e.target.value
     setForm(f => ({ ...f, tipo }))
@@ -124,7 +124,6 @@ function Biomarcadores() {
     }
   }
 
-  
   const diasDelMes = () => {
     const year = hoy.getFullYear()
     const month = hoy.getMonth()
@@ -143,18 +142,16 @@ function Biomarcadores() {
       <main>
         <div className="tratamiento-container">
 
-          
           <div className="tratamiento-usuario">
             <img
               src="https://img.icons8.com/ios-filled/50/000000/user-male-circle.png"
               alt="Perfil" className="user-avatar"
             />
-            <div className="nombre">Rodrigo Lopez</div>
+            <div className="nombre">{nombreCompleto || 'Usuario'}</div>
           </div>
 
           <h1 className="tratamiento-titulo">Biomarcadores</h1>
 
-          {/* Botón registrar */}
           <div className="text-center">
             <button className="btn-registrar" onClick={() => setModalAbierto(true)}>
               <img src="https://img.icons8.com/ios-filled/24/ffffff/plus.png" alt="add" />
@@ -162,13 +159,12 @@ function Biomarcadores() {
             </button>
           </div>
 
-          
           <div className="biomarcadores-hoy">
             <h2>Biomarcadores hoy</h2>
 
             {estadoPaciente && (
               <p className="estado">
-                Estado de Rodrigo:{' '}
+                Estado de {usuarioData.nombre || 'paciente'}:{' '}
                 <strong className={estadoPaciente === 'BUENO' ? 'bueno' : 'alerta'}>
                   {estadoPaciente}
                 </strong>
@@ -197,7 +193,7 @@ function Biomarcadores() {
                     {b.estado === 'alerta' && (
                       <div className="medicion-alerta">⚠️ Fuera del rango normal</div>
                     )}
-                    {b.notas && <div className="medicion-notas">{b.notas}</div>}
+                    {b.notes || b.notas ? <div className="medicion-notas">{b.notas}</div> : null}
                   </div>
                 ))
               )}
@@ -206,7 +202,6 @@ function Biomarcadores() {
 
           <hr className="divider-biomarcadores" />
 
-          
           <div className="biomarcadores-mes">
             <h2>Biomarcadores en el mes</h2>
             <h3 className="mes-titulo" style={{ textTransform: 'capitalize' }}>
@@ -238,7 +233,6 @@ function Biomarcadores() {
         </div>
       </main>
 
-      
       {modalAbierto && (
         <div className="modal" style={{ display: 'flex' }}>
           <div className="modal-content">

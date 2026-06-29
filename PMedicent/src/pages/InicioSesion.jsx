@@ -1,12 +1,11 @@
 import { useState } from 'react'
-import { useNavigate, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import TarjetaFormulario from '../components/TarjetaFormulario'
 import CampoTexto from '../components/CampoTexto'
 import Button from '../components/Button'
-import API from '../api' // Importamos la API
+import API from '../api'
 
 function InicioSesion() {
-  const navigate = useNavigate()
   const [form, setForm] = useState({ correo: '', contrasena: '' })
   const [error, setError] = useState('')
   const [cargando, setCargando] = useState(false)
@@ -21,14 +20,13 @@ function InicioSesion() {
     setCargando(true)
 
     try {
-      // Llamamos al método login que creamos en api.js
       const respuesta = await API.login(form.correo, form.contrasena)
       console.log('Login exitoso:', respuesta)
-      
-      // Opcional: Podrías guardar el usuario en el localStorage si lo necesitas más adelante
-      // localStorage.setItem('usuario', JSON.stringify(respuesta.usuario))
 
-      navigate('/dashboard')
+      localStorage.setItem('token', respuesta.accessToken)
+      localStorage.setItem('usuario', JSON.stringify(respuesta.user))
+
+      window.location.href = '/dashboard'
     } catch (err) {
       console.error('Error en el inicio de sesión:', err)
       setError(err.message || 'Correo o contraseña incorrectos.')

@@ -1,16 +1,30 @@
-import { Link, useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 function Header() {
   const location = useLocation();
-  
-  // Solo mostrar Dashboard, Tratamiento y Biomarcadores cuando NO esté en Inicio ni en páginas de auth
+  const navigate = useNavigate();
+
+  const [estaLogueado, setEstaLogueado] = useState(!!localStorage.getItem('usuario'));
+
+  useEffect(() => {
+    setEstaLogueado(!!localStorage.getItem('usuario'));
+  }, [location]);
+
   const showFullMenu = !['/', '/inicio-sesion', '/registro', '/elegir-rol'].includes(location.pathname);
+
+  const handleCerrarSesion = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('usuario');
+    setEstaLogueado(false);
+    navigate('/inicio-sesion');
+  };
 
   return (
     <header className="navbar">
       <div className="container">
         <Link to="/" className="logo">MEDICENT</Link>
-        
+
         <ul className="nav-links">
           {showFullMenu && (
             <>
@@ -19,9 +33,22 @@ function Header() {
               <li><Link to="/tomar-biomarcadores">Biomarcadores</Link></li>
             </>
           )}
-          
-          <li><Link to="/registro">Registrarse</Link></li>
-          <li><Link to="/inicio-sesion">Iniciar sesión</Link></li>
+
+          {estaLogueado ? (
+            <li>
+              <button
+                onClick={handleCerrarSesion}
+                style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'inherit', fontSize: 'inherit' }}
+              >
+                Cerrar sesión
+              </button>
+            </li>
+          ) : (
+            <>
+              <li><Link to="/registro">Registrarse</Link></li>
+              <li><Link to="/inicio-sesion">Iniciar sesión</Link></li>
+            </>
+          )}
         </ul>
       </div>
     </header>
