@@ -36,10 +36,7 @@ function Header() {
 
           {estaLogueado ? (
             <li>
-              <button
-                onClick={handleCerrarSesion}
-                style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'inherit', fontSize: 'inherit' }}
-              >
+              <button onClick={handleCerrarSesion} className="btn-cerrar-sesion">
                 Cerrar sesión
               </button>
             </li>

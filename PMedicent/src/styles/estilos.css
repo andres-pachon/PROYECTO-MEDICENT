@@ -1719,3 +1719,32 @@ body {
 .nav-links a:hover {
     color: #14b8a6 !important;
 }
+/* Layout para páginas con header y footer */
+#root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#root > * {
+    flex-shrink: 0;
+}
+
+.sesion-iniciada-main {
+    flex: 1;
+}
+.nav-links {
+    align-items: center;
+}
+
+.btn-cerrar-sesion {
+    all: unset;
+    cursor: pointer;
+    color: white !important;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.btn-cerrar-sesion:hover {
+    color: #14b8a6 !important;
+}

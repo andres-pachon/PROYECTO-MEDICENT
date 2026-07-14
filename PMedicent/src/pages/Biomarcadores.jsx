@@ -7,7 +7,14 @@ const TIPOS = {
   fc:      { label: 'Frecuencia Cardíaca', unidad: 'lpm' },
   spo2:    { label: 'Saturación de Oxígeno (SpO2)', unidad: '%' },
   temp:    { label: 'Temperatura', unidad: '°C' },
-  glucosa:{ label: 'Glucosa', unidad: 'mg/dL' }
+  glucosa: { label: 'Glucosa', unidad: 'mg/dL' }
+}
+
+const RANGOS = {
+  fc:      { min: 60,   max: 100,  unidad: 'lpm' },
+  spo2:    { min: 95,   max: 100,  unidad: '%' },
+  temp:    { min: 36.1, max: 37.2, unidad: '°C' },
+  glucosa: { min: 70,   max: 100,  unidad: 'mg/dL' }
 }
 
 function Biomarcadores() {
@@ -16,7 +23,6 @@ function Biomarcadores() {
 
   const [biomarcadoresHoy, setBiomarcadoresHoy] = useState([])
   const [bioMes, setBioMes] = useState([])
-  const [rangos, setRangos] = useState(null)
   const [cargando, setCargando] = useState(true)
   const [modalAbierto, setModalAbierto] = useState(false)
   const [guardando, setGuardando] = useState(false)
@@ -41,14 +47,12 @@ function Biomarcadores() {
   const cargarDatos = async () => {
     setCargando(true)
     try {
-      const [hoyData, todosData, rangosData] = await Promise.all([
+      const [hoyData, todosData] = await Promise.all([
         API.getBiomarcadoresHoy(),
         API.getBiomarcadores(),
-        API.getRangos()
       ])
       setBiomarcadoresHoy(hoyData)
       setBioMes(todosData)
-      setRangos(rangosData)
     } catch (err) {
       console.error('Error cargando biomarcadores:', err)
     } finally {
@@ -57,9 +61,9 @@ function Biomarcadores() {
   }
 
   const calcularEstado = () => {
-    if (!rangos || biomarcadoresHoy.length === 0) return null
+    if (biomarcadoresHoy.length === 0) return null
     const hayAlerta = biomarcadoresHoy.some(b => {
-      const rango = rangos[b.tipo]
+      const rango = RANGOS[b.tipo]
       if (!rango) return false
       return b.valor < rango.min || b.valor > rango.max
     })
@@ -71,8 +75,8 @@ function Biomarcadores() {
   const handleTipoChange = (e) => {
     const tipo = e.target.value
     setForm(f => ({ ...f, tipo }))
-    if (rangos && tipo && rangos[tipo]) {
-      const r = rangos[tipo]
+    if (tipo && RANGOS[tipo]) {
+      const r = RANGOS[tipo]
       setRangoInfo(`Rango normal: ${r.min} – ${r.max} ${r.unidad}`)
     } else {
       setRangoInfo(null)
@@ -82,8 +86,8 @@ function Biomarcadores() {
   const handleChange = (e) => setForm(f => ({ ...f, [e.target.id]: e.target.value }))
 
   const getEstadoBio = (tipo, valor) => {
-    if (!rangos || !rangos[tipo]) return 'desconocido'
-    const r = rangos[tipo]
+    const r = RANGOS[tipo]
+    if (!r) return 'desconocido'
     return (valor >= r.min && valor <= r.max) ? 'bueno' : 'alerta'
   }
 
@@ -102,7 +106,6 @@ function Biomarcadores() {
     setGuardando(true)
     try {
       await API.crearBiomarcador({
-        usuarioId: 1,
         tipo: form.tipo,
         nombre: TIPOS[form.tipo]?.label ?? form.tipo,
         valor,
@@ -118,7 +121,7 @@ function Biomarcadores() {
       await cargarDatos()
     } catch (err) {
       console.error(err)
-      setErrorForm('Error al guardar. Verifica que json-server esté corriendo.')
+      setErrorForm('Error al guardar el biomarcador.')
     } finally {
       setGuardando(false)
     }
@@ -139,7 +142,7 @@ function Biomarcadores() {
   return (
     <>
       <Header />
-      <main>
+      <main className="main-content">
         <div className="tratamiento-container">
 
           <div className="tratamiento-usuario">
@@ -185,15 +188,15 @@ function Biomarcadores() {
                       <span className="valor-unidad"> {b.unidad}</span>
                     </div>
                     <div className="medicion-hora">🕐 {b.hora}</div>
-                    {rangos && rangos[b.tipo] && (
+                    {RANGOS[b.tipo] && (
                       <div className="medicion-rango" style={{ fontSize: '12px', color: '#888' }}>
-                        Rango: {rangos[b.tipo].min}–{rangos[b.tipo].max} {b.unidad}
+                        Rango: {RANGOS[b.tipo].min}–{RANGOS[b.tipo].max} {b.unidad}
                       </div>
                     )}
                     {b.estado === 'alerta' && (
                       <div className="medicion-alerta">⚠️ Fuera del rango normal</div>
                     )}
-                    {b.notes || b.notas ? <div className="medicion-notas">{b.notas}</div> : null}
+                    {b.notas && <div className="medicion-notas">{b.notas}</div>}
                   </div>
                 ))
               )}

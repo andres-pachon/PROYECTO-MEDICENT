@@ -2,17 +2,31 @@ const BASE_URL = 'http://127.0.0.1:5000/api';
 
 async function apiFetch(endpoint, options = {}) {
   const url = `${BASE_URL}${endpoint}`;
+  const token = localStorage.getItem('token');
+
   const defaults = {
-    headers: { 'Content-Type': 'application/json' }
+    headers: {
+      'Content-Type': 'application/json',
+      ...(token && { 'Authorization': `Bearer ${token}` })
+    }
   };
-  const res = await fetch(url, { ...defaults, ...options });
-  
+
+  // Merge headers correctamente
+  const mergedOptions = {
+    ...options,
+    headers: {
+      ...defaults.headers,
+      ...(options.headers || {})
+    }
+  };
+
+  const res = await fetch(url, mergedOptions);
+
   if (!res.ok) {
-    // Intentamos capturar el mensaje de error específico que envía Flask si existe
     const errorData = await res.json().catch(() => ({}));
     throw new Error(errorData.mensaje || `Error ${res.status}: ${res.statusText}`);
   }
-  
+
   const text = await res.text();
   return text ? JSON.parse(text) : null;
 }
@@ -33,7 +47,7 @@ const API = {
   async crearUsuario(usuario) {
     return apiFetch('/register', {
       method: 'POST',
-      body: JSON.stringify(usuario) // Ya no lleva id manual (Date.now()), MySQL lo autoincrementa
+      body: JSON.stringify(usuario)
     });
   },
 
@@ -61,7 +75,7 @@ const API = {
   async crearToma(toma) {
     return apiFetch('/tomas', {
       method: 'POST',
-      body: JSON.stringify({ ...toma, id: Date.now() })
+      body: JSON.stringify(toma)
     });
   },
 
@@ -89,7 +103,7 @@ const API = {
   async crearBiomarcador(bio) {
     return apiFetch('/biomarcadores', {
       method: 'POST',
-      body: JSON.stringify({ ...bio, id: Date.now() })
+      body: JSON.stringify(bio)
     });
   },
 
@@ -115,7 +129,7 @@ const API = {
   async crearMedicamento(medicamento) {
     return apiFetch('/medicamentos', {
       method: 'POST',
-      body: JSON.stringify({ ...medicamento, id: Date.now().toString() })
+      body: JSON.stringify(medicamento)
     });
   },
 
@@ -134,7 +148,7 @@ const API = {
   async crearTratamientoSemana(entrada) {
     return apiFetch('/tratamientoSemana', {
       method: 'POST',
-      body: JSON.stringify({ ...entrada, id: Date.now().toString() })
+      body: JSON.stringify(entrada)
     });
   },
 
