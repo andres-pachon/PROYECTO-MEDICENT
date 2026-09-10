@@ -166,6 +166,68 @@ const API = {
 
   async getConsumo() {
     return apiFetch('/consumo');
+  },
+
+  // ==========================================
+  // ADMINISTRADOR
+  // ==========================================
+
+  // --- Usuarios ---
+  async getAdminUsuarios() {
+    return apiFetch('/admin/usuarios');
+  },
+
+  async getAdminUsuario(id) {
+    return apiFetch(`/admin/usuarios/${id}`);
+  },
+
+  async actualizarUsuario(id, datos) {
+    return apiFetch(`/admin/usuarios/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(datos)
+    });
+  },
+
+  async eliminarUsuario(id) {
+    return apiFetch(`/admin/usuarios/${id}`, {
+      method: 'DELETE'
+    });
+  },
+
+  // --- Medicamentos ---
+  async getAdminMedicamentos() {
+    return apiFetch('/admin/medicamentos');
+  },
+
+  async actualizarMedicamento(id, datos) {
+    return apiFetch(`/admin/medicamentos/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(datos)
+    });
+  },
+
+  async eliminarMedicamentoAdmin(id) {
+    return apiFetch(`/admin/medicamentos/${id}`, {
+      method: 'DELETE'
+    });
+  },
+
+  // --- Biomarcadores ---
+  async getAdminBiomarcadores() {
+    return apiFetch('/admin/biomarcadores');
+  },
+
+  async actualizarBiomarcador(id, datos) {
+    return apiFetch(`/admin/biomarcadores/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(datos)
+    });
+  },
+
+  async eliminarBiomarcador(id) {
+    return apiFetch(`/admin/biomarcadores/${id}`, {
+      method: 'DELETE'
+    });
   }
 
 };

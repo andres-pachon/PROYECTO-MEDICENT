@@ -13,6 +13,11 @@ import PerfilCuidador from './pages/PerfilCuidador'
 import EditarPerfil from './pages/EditarPerfil'
 import Tratamiento from './pages/Tratamiento'
 import Biomarcadores from './pages/Biomarcadores'
+import AdminDashboard from './pages/AdminDashboard'
+import AdminUsuarios from './pages/AdminUsuarios'
+import AdminMedicamentos from './pages/AdminMedicamentos'
+import AdminBiomarcadores from './pages/AdminBiomarcadores'
+import AdminRoute from './components/AdminRoute'
 
 function App() {
   return (
@@ -30,6 +35,10 @@ function App() {
       <Route path="/editar-perfil" element={<EditarPerfil />} />
       <Route path="/tratamiento" element={<Tratamiento />} />
       <Route path="/tomar-biomarcadores" element={<Biomarcadores />} />
+      <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
+      <Route path="/admin/usuarios" element={<AdminRoute><AdminUsuarios /></AdminRoute>} />
+      <Route path="/admin/medicamentos" element={<AdminRoute><AdminMedicamentos /></AdminRoute>} />
+      <Route path="/admin/biomarcadores" element={<AdminRoute><AdminBiomarcadores /></AdminRoute>} />
     </Routes>
   )
 }

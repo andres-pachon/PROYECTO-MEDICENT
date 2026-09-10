@@ -26,7 +26,12 @@ function InicioSesion() {
       localStorage.setItem('token', respuesta.accessToken)
       localStorage.setItem('usuario', JSON.stringify(respuesta.user))
 
-      window.location.href = '/dashboard'
+      // Redirección según el rol
+      if (respuesta.user.rol === 'admin') {
+        window.location.href = '/admin'
+      } else {
+        window.location.href = '/dashboard'
+      }
     } catch (err) {
       console.error('Error en el inicio de sesión:', err)
       setError(err.message || 'Correo o contraseña incorrectos.')
