@@ -12,6 +12,7 @@ function Registro() {
     apellido: '', 
     idTipoDocumento: '1',
     documento: '',
+    telefono: '', // <-- AGREGADO: Campo obligatorio en tu backend
     fechaNacimiento: '',
     correo: '', 
     contrasena: '', 
@@ -44,18 +45,19 @@ function Registro() {
       console.log("Enviando datos al backend:", form)
 
       const respuesta = await API.crearUsuario({
-      nombre: form.nombre,          
-      apellido: form.apellido,       
-      correo: form.correo,
-      password: form.contrasena,
-      idTipoDocumento: parseInt(form.idTipoDocumento),
-      documento: form.documento,
-      fechaNacimiento: form.fechaNacimiento
-    })
+        nombre: form.nombre,          
+        apellido: form.apellido,       
+        correo: form.correo,
+        password: form.contrasena,
+        idTipoDocumento: parseInt(form.idTipoDocumento),
+        documento: form.documento,
+        fechaNacimiento: form.fechaNacimiento,
+        telefono: form.telefono // <-- AGREGADO: Se envía al backend
+      })
 
       console.log("Respuesta del servidor:", respuesta)
       alert("¡Registro exitoso! Ahora puedes iniciar sesión.")
-      navigate('/elegir-rol')
+      navigate('/inicio-sesion') // Redirigir al inicio de sesión
 
     } catch (err) {
       console.error("Error completo:", err)
@@ -88,6 +90,10 @@ function Registro() {
       </div>
 
       <CampoTexto label="Número de Documento" id="documento" placeholder="Ingrese su documento" required value={form.documento} onChange={handleChange} />
+      
+      {/* AGREGADO: Campo visual para el teléfono */}
+      <CampoTexto label="Teléfono" id="telefono" type="tel" placeholder="Ingrese su teléfono" required value={form.telefono} onChange={handleChange} />
+
       <CampoTexto label="Fecha de Nacimiento" id="fechaNacimiento" type="date" required value={form.fechaNacimiento} onChange={handleChange} />
       <CampoTexto label="Correo" id="correo" type="email" placeholder="Ingrese su correo" required value={form.correo} onChange={handleChange} />
       <CampoTexto label="Contraseña" id="contrasena" type="password" placeholder="Mínimo 6 caracteres" required value={form.contrasena} onChange={handleChange} />

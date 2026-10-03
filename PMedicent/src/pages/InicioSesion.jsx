@@ -23,14 +23,22 @@ function InicioSesion() {
       const respuesta = await API.login(form.correo, form.contrasena)
       console.log('Login exitoso:', respuesta)
 
-      localStorage.setItem('token', respuesta.accessToken)
-      localStorage.setItem('usuario', JSON.stringify(respuesta.user))
-
-      // Redirección según el rol
-      if (respuesta.user.rol === 'admin') {
-        window.location.href = '/admin'
-      } else {
-        window.location.href = '/dashboard'
+      // Se guarda el token recibido
+      const token = respuesta.access_token || respuesta.accessToken || respuesta.token
+      if (token) {
+        localStorage.setItem('token', token)
+      }
+      
+      if (respuesta.user || respuesta.usuario) {
+        const usuarioGuardar = respuesta.user || respuesta.usuario
+        localStorage.setItem('usuario', JSON.stringify(usuarioGuardar))
+        
+        // Redirección según el rol
+        if (usuarioGuardar.rol === 'admin') {
+          window.location.href = '/admin'
+        } else {
+          window.location.href = '/dashboard'
+        }
       }
     } catch (err) {
       console.error('Error en el inicio de sesión:', err)

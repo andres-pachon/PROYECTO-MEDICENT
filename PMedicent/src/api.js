@@ -24,7 +24,8 @@ async function apiFetch(endpoint, options = {}) {
 
   if (!res.ok) {
     const errorData = await res.json().catch(() => ({}));
-    throw new Error(errorData.mensaje || `Error ${res.status}: ${res.statusText}`);
+    // Corrección: Flask envía 'error' o 'message', no 'mensaje'
+    throw new Error(errorData.error || errorData.message || `Error ${res.status}: ${res.statusText}`);
   }
 
   const text = await res.text();
@@ -40,7 +41,8 @@ const API = {
   async login(correo, password) {
     return apiFetch('/login', {
       method: 'POST',
-      body: JSON.stringify({ email: correo, password })
+      // CORRECCIÓN: Se envía 'correo' en lugar de 'email' para que coincida con Flask
+      body: JSON.stringify({ correo, password }) 
     });
   },
 
