@@ -41,8 +41,7 @@ const API = {
   async login(correo, password) {
     return apiFetch('/login', {
       method: 'POST',
-      // CORRECCIÓN: Se envía 'correo' en lugar de 'email' para que coincida con Flask
-      body: JSON.stringify({ correo, password }) 
+      body: JSON.stringify({ correo: correo, email: correo, password: password })
     });
   },
 
